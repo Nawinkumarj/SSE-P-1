@@ -3431,57 +3431,117 @@ body {
     max-width: 98vw;
   }
 }
-
-
 /* Testimonials ends */
+
 /* our serving areas */
 .serving-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2vw;
+  max-width: 1200px;
+  margin: auto;
+  padding: 28px 0;
 }
 
 .serving-heading {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #294365;
+  letter-spacing: 1px;
 }
 
 .serving-content {
   display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.serving-map {
-  flex: 2 1 300px;
-  min-width: 270px;
-  max-width: 420px;
+.serving-image-card {
+  flex: 8 1 660px;
+  min-width: 380px;
+  max-width: 680px;
+  border-radius: 18px;
+  /* height: 300px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.map-img {
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 0 7px rgba(0,0,0,0.09);
+.serving-image {
+  width: 96%;
+  height: 350px;
+  /* height: auto; */
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.09);
 }
 
 .serving-details {
-  flex: 1 1 220px;
-  min-width: 180px;
+  flex: 6 1 300px;
+  min-width: 258px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.serving-location {
-  background: #f6f6f9;
-  border-radius: 7px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  margin-bottom: 16px;
-  padding: 10px 16px;
+.serving-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
 }
 
-@media (max-width: 820px) {
+.serving-grid-item {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.33rem;
+  color: #294365;
+  gap: 4px;
+}
+
+.location-name {
+  font-size: 1.21rem;
+  font-weight: 700;
+}
+
+.serving-para {
+  margin-top: 24px;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 12px 20px;
+}
+
+@media (max-width: 1000px) {
+  .serving-container {
+    padding: 12px 0;
+  }
+  .serving-heading {
+    margin-bottom: 12px;
+    font-size: 2rem;
+  }
   .serving-content {
     flex-direction: column;
-    gap: 24px;
+    gap: 18px;
+  }
+  .serving-image-card, .serving-details {
+    max-width: 100%;
+    min-width: unset;
+    padding: 10px 4px; 
+    max-height: 300px;
+  }
+  .serving-details {
+    gap: 10px;
+  }
+  .serving-grid {
+    grid-template-columns: 1fr;
+    gap: 10px 0;
+  }
+  .serving-para {
+    font-size: 16px;
+    margin-top: 12px;
+    padding: 8px 12px;
   }
 }
 
