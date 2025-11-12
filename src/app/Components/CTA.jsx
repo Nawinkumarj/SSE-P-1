@@ -25,10 +25,11 @@ export default function CTA() {
         <div className="content-section">
           <div className="content-wrapper">
             <h1 className="main-heading">
-              Precision. Power. Partnership.
+               Let’s Build Something Strong Together
             </h1>
             <p className="description">
-                Experience engineering excellence tailored to your project’s needs.
+                Whether you’re constructing your dream home or a commercial project, we’re here to deliver top
+grade materials on time, every time.
             </p>
             <button className="phone-button" onClick={handlePhoneClick}>
               <span className="button-text">{phoneNumber}</span>

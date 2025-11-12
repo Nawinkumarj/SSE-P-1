@@ -234,7 +234,7 @@ export default function Products() {
                     src={product.image}
                     alt={product.name}
                     onError={(e) => {
-                      e.target.src = "/placeholder.png";
+                      e.target.src = "";
                     }}
                   />
                 </div>

@@ -98,12 +98,22 @@ export default function Page() {
             </h1>
             
             <p className="description">
-              We're here to help! Whether you have a question about our 
-              services, need assistance with your account, or want to 
-              provide feedback, our team is ready to assist you.
+              We’d love to hear from you! 
+Whether you need a quote for Fly Ash Bricks, M-Sand, or Paver Blocks, or just want to learn 
+more about our materials, our team at Sai Saranya Enterprises is here to help. 
+Reach out to us through the form below or connect with us directly — we’ll respond promptly.
             </p>
             
             <div className="contact-details">
+
+ <div className="contact-item">
+                <span className="contact-label">Address:</span>
+                <a href="mailto:hello@finpro.com" className="contact-value">
+                  Sai Saranya Enterprises 
+                </a>
+                <p className='availability'>Kundrathur, Chennai – Tamil Nadu</p>
+              </div>
+
               <div className="contact-item">
                 <span className="contact-label">Email:</span>
                 <a href="mailto:hello@finpro.com" className="contact-value">
@@ -117,10 +127,21 @@ export default function Page() {
                   +91 9876543210
                 </a>
               </div>
+
+              <div className="contact-item">
+                <span className="contact-label">Whatsapp:</span>
+                <a href="tel:+1234567878" className="contact-value">
+                  +91 9876543210
+                </a>
+              </div>
               
               <p className="availability">
-                Available Monday to Friday, 9 AM - 6 PM IST
+                <span style={{fontWeight:"bold"}}>Business Hours</span><br/>
+               Monday – Saturday: 8:00 AM to 7:00 PM <br/>
+               Sunday: Closed
+
               </p>
+              
             </div>
           </div>
         </div>
