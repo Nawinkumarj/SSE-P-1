@@ -11,25 +11,42 @@ const slides = [
   {
     subtitle: "SAND",
     description: "Fine Grade Construction Sand",
-    image: "/sand.png",
+    images: [
+      "/sand.png",
+      "/sand.png",
+      "/sand.png",
+    ],
     bg: "linear-gradient(135deg, #F4A460 0%, #DEB887 50%, #D2B48C 100%)",
     cta: "Book Sand"
   },
   {
     subtitle: "BRICKS",
     description: "Premium Red Clay Bricks",
-    image: "/bricks.png",
+    images: [
+      "/bricks1.png",
+      "/bricks2.png",
+      "/bricks3.png",
+      "/bricks4.png"
+    ],
     bg: "linear-gradient(135deg, #B22222 0%, #8B0000 50%, #654321 100%)",
     cta: "Book Bricks"
   },
   {
     subtitle: "CEMENT",
     description: "Grade 53 Portland Cement",
-    image: "/cement.png",
+    images: [
+      "/cement1.png",
+      "/cement2.png",
+      "/cement3.png"
+    ],
     bg: "linear-gradient(135deg, #708090 0%, #2F4F4F 50%, #696969 100%)",
     cta: "Book Cement"
   }
 ];
+
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 export default function HeroBannerCenterFixed() {
   const bannerRef = useRef(null);
@@ -129,7 +146,7 @@ export default function HeroBannerCenterFixed() {
                 position: "relative"
               }}>
                 <Image 
-                  src={slide.image} 
+                  src={getRandom(slide.images)} 
                   alt={slide.subtitle} 
                   width={300} 
                   height={300}

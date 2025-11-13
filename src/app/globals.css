@@ -3460,7 +3460,6 @@ body {
   min-width: 380px;
   max-width: 680px;
   border-radius: 18px;
-  /* height: 300px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3469,7 +3468,6 @@ body {
 .serving-image {
   width: 96%;
   height: 350px;
-  /* height: auto; */
   object-fit: cover;
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.09);
