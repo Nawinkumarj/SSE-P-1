@@ -19,8 +19,7 @@ export default function Page() {
       ...prev,
       [name]: value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -31,44 +30,44 @@ export default function Page() {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.firstName.trim()) {
       newErrors.firstName = 'First name is required';
     }
-    
+
     if (!formData.lastName.trim()) {
       newErrors.lastName = 'Last name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log('Form submitted:', formData);
-      
+
       // Reset form
       setFormData({
         firstName: '',
@@ -76,7 +75,7 @@ export default function Page() {
         email: '',
         message: ''
       });
-      
+
       alert('Message sent successfully!');
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -96,20 +95,20 @@ export default function Page() {
               Get in —<br />
               touch with us
             </h1>
-            
+
             <p className="description">
-              We’d love to hear from you! 
-Whether you need a quote for Fly Ash Bricks, M-Sand, or Paver Blocks, or just want to learn 
-more about our materials, our team at Sai Saranya Enterprises is here to help. 
-Reach out to us through the form below or connect with us directly — we’ll respond promptly.
+              We’d love to hear from you!
+              Whether you need a quote for Fly Ash Bricks, M-Sand, or Paver Blocks, or just want to learn
+              more about our materials, our team at Sai Saranya Enterprises is here to help.
+              Reach out to us through the form below or connect with us directly — we’ll respond promptly.
             </p>
-            
+
             <div className="contact-details">
 
- <div className="contact-item">
+              <div className="contact-item">
                 <span className="contact-label">Address:</span>
                 <a href="mailto:hello@finpro.com" className="contact-value">
-                  Sai Saranya Enterprises 
+                  Sai Saranya Enterprises
                 </a>
                 <p className='availability'>Kundrathur, Chennai – Tamil Nadu</p>
               </div>
@@ -120,11 +119,11 @@ Reach out to us through the form below or connect with us directly — we’ll r
                   hello@saisaranyaenterprises.com
                 </a>
               </div>
-              
+
               <div className="contact-item">
                 <span className="contact-label">Phone:</span>
-                <a href="tel:+1234567878" className="contact-value">
-                  +91 9876543210
+                <a href="tel:08047650170" className="contact-value">
+                  +91 8047650170
                 </a>
               </div>
 
@@ -134,14 +133,14 @@ Reach out to us through the form below or connect with us directly — we’ll r
                   +91 9876543210
                 </a>
               </div>
-              
+
               <p className="availability">
-                <span style={{fontWeight:"bold"}}>Business Hours</span><br/>
-               Monday – Saturday: 8:00 AM to 7:00 PM <br/>
-               Sunday: Closed
+                <span style={{ fontWeight: "bold" }}>Business Hours</span><br />
+                Monday – Saturday: 8:00 AM to 7:00 PM <br />
+                Sunday: Closed
 
               </p>
-              
+
             </div>
           </div>
         </div>
@@ -167,7 +166,7 @@ Reach out to us through the form below or connect with us directly — we’ll r
                   <span className="error-message">{errors.firstName}</span>
                 )}
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="lastName" className="form-label">
                   Last Name

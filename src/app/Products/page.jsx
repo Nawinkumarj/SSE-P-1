@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -20,8 +20,9 @@ export default function Page() {
     {
       id: 1,
       category: "PAVER BLOCK",
-      heroImage: "/sand.png",
-      sampleImage: "/paver.png",
+      heroImage: "/blockbg.webp",
+      sampleImage: "/PaverBlock.jpeg",
+      sectionId: "paver-block",
       products: [
         {
           id: 1,
@@ -34,7 +35,7 @@ export default function Page() {
         },
         {
           id: 2,
-          image: "/paver.png",
+          image: "/ZigZag.jpg",
           title: "Zigzag Paver Block",
           specs: {
             thickness: "60mm/80mm",
@@ -46,12 +47,13 @@ export default function Page() {
     {
       id: 2,
       category: "Bricks & Blocks",
-      heroImage: "/chalet-hero.jpg",
-      sampleImage: "/chalet.png",
+      heroImage: "/BricksBlocks.jpg",
+      sampleImage: "/BricksBlocks.jpg",
+      sectionId: "bricks-blocks",
       products: [
         {
           id: 1,
-          image: "/FlyashBricks.jpg",
+          image: "/FlyashBricks1.jpg",
           title: "Fly Ash Bricks ",
           specs: {
             thickness: "80mm",
@@ -59,7 +61,7 @@ export default function Page() {
         },
         {
           id: 2,
-          image: "/chalet.png",
+          image: "/solidBlock.jpg",
           title: "Solid Blocks ",
           specs: {
             thickness: "80mm",
@@ -71,8 +73,9 @@ export default function Page() {
     {
       id: 3,
       category: "SAND & AGGREGATES",
-      heroImage: "/compound-hero.jpg",
-      sampleImage: "/compound.png",
+      heroImage: "/sand-aggre.jpg",
+      sampleImage: "/sand-aggre.jpg",
+      sectionId: "sand-aggregates",
       products: [
         {
           id: 1,
@@ -103,8 +106,9 @@ export default function Page() {
     {
       id: 4,
       category: "Stones & Drainage",
-      heroImage: "/solid-hero.jpg",
-      sampleImage: "/solid.png",
+      heroImage: "/stone-drain.jpg",
+      sampleImage: "/stone-drain.jpg",
+      sectionId: "stones-drainage",
       products: [
         {
           id: 1,
@@ -116,7 +120,7 @@ export default function Page() {
         },
         {
           id: 2,
-          image: "/solid.png",
+          image: "/saurcerDrain.jpg",
           title: "Sarucer Drain ",
           specs: {
             thickness: "80mm",
@@ -138,6 +142,10 @@ export default function Page() {
       ),
     }))
     .filter((section) => section.products.length > 0);
+
+  useLayoutEffect(() => {
+    sectionsRef.current.length = filteredSections.length;
+  }, [filteredSections]);
 
   // GSAP Pinning - depends on filteredSections for cleanup and re-init
   useGSAP(
@@ -201,15 +209,15 @@ export default function Page() {
       <div
         className="top-bar"
         style={{
+          width: "90%",
+          margin: "20px auto",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           padding: "0.5rem 1rem",
-          background: "#f5f5f5",
           flexWrap: "wrap",
         }}
       >
-        {/* Category List Left */}
         <div
           className="category-list"
           style={{
@@ -231,25 +239,32 @@ export default function Page() {
               }
               style={{
                 padding: "0.5rem 1rem",
-                borderRadius: "20px",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
                 border:
                   selectedCategoryId === section.id
-                    ? "2px solid #29ae65"
+                    ? "2px solid var(--primary)"
                     : "1px solid #ccc",
                 background:
-                  selectedCategoryId === section.id ? "#d4f0dc" : "white",
+                  selectedCategoryId === section.id
+                    ? "var(--primary)"
+                    : "white",
+                color: selectedCategoryId === section.id ? "white" : "black",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
-                fontWeight: selectedCategoryId === section.id ? "bold" : "normal",
+                fontWeight:
+                  selectedCategoryId === section.id ? "bold" : "normal",
               }}
             >
               {section.category}
             </button>
           ))}
         </div>
-
         {/* Search Bar Right */}
-        <div className="search-bar" style={{ flex: "0 0 250px", marginTop: "0.5rem" }}>
+        <div
+          className="search-bar"
+          style={{ flex: "0 0 250px", marginTop: "0.5rem" }}
+        >
           <input
             type="text"
             placeholder="Search products..."
@@ -265,15 +280,20 @@ export default function Page() {
           />
         </div>
       </div>
-
-      <div className="stack-container" key={filteredSections.map((s) => s.id).join("-")}>
+      <div
+        className="stack-container"
+        key={filteredSections.map((s) => s.id).join("-")}
+      >
         {filteredSections.length === 0 && (
-          <p style={{ padding: "2rem", textAlign: "center", color: "#666" }}>No products found.</p>
+          <p style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+            No products found.
+          </p>
         )}
         {filteredSections.map((section, sectionIdx) => (
           <section
             key={section.id}
             ref={(el) => (sectionsRef.current[sectionIdx] = el)}
+            id={section.sectionId} // <-- this enables anchor navigation!
             className="stack-section"
           >
             <div className="section-hero">
@@ -324,7 +344,9 @@ export default function Page() {
                       <div className="product-details">
                         <h2 className="product-title">{product.title}</h2>
                         <div className="product-specs">
-                          <p className="thickness">Thickness : {product.specs.thickness}</p>
+                          <p className="thickness">
+                            Thickness : {product.specs.thickness}
+                          </p>
                           {product?.specs?.sizes?.length > 0 && (
                             <div className="sizes">
                               {product.specs.sizes.map((size, i) => (
@@ -340,22 +362,17 @@ export default function Page() {
                         className="product-card-circle-icon"
                         onClick={(e) => handleCircleClick(cardKey, e)}
                       >
-                        <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-                          <circle
-                            cx="20"
-                            cy="20"
-                            r="18"
-                            fill="#e4f0e8"
-                            stroke="#29ae65"
-                            strokeWidth="2"
-                          />
-                          <path
-                            d="M20 12v8m0 8h0"
-                            stroke="#29ae65"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                          <circle cx="20" cy="28" r="1.5" fill="#29ae65" />
+                        <svg
+                          width="25"
+                          height="25"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#29ae65"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.78 19.78 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.78 19.78 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.21.3 2.4.54 3.56a2 2 0 0 1-.45 1.95L8.09 10.91a16 16 0 0 0 6 6l1.68-1.68a2 2 0 0 1 1.95-.45c1.16.24 2.35.41 3.56.54A2 2 0 0 1 22 16.92z" />
                         </svg>
                         {circleActionsIdx === cardKey && (
                           <div
@@ -385,14 +402,18 @@ export default function Page() {
           </section>
         ))}
       </div>
-
       {/* Booking Form Modal */}
       {showBookingForm && (
         <div className="product-modal-overlay" onClick={closeForm}>
           <div className="product-modal" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title">Book Material</h3>
             <form className="booking-form">
-              <input type="text" placeholder="Your Name" required className="booking-input" />
+              <input
+                type="text"
+                placeholder="Your Name"
+                required
+                className="booking-input"
+              />
               <input
                 type="text"
                 placeholder="Company Name"
@@ -423,9 +444,13 @@ export default function Page() {
                 required
                 className="booking-input"
               />
-              <button type="submit" className="booking-submit-btn">Submit</button>
+              <button type="submit" className="booking-submit-btn">
+                Submit
+              </button>
             </form>
-            <button className="modal-close-btn" onClick={closeForm}>×</button>
+            <button className="modal-close-btn" onClick={closeForm}>
+              ×
+            </button>
           </div>
         </div>
       )}

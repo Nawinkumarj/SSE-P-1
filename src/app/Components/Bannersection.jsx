@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,34 +8,24 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const slides = [
   {
-    subtitle: "SAND",
-    description: "Fine Grade Construction Sand",
-    images: [
-      "/sand.png"
-    ],
-    bg: "linear-gradient(135deg, #F4A460 0%, #DEB887 50%, #D2B48C 100%)",
+    subtitle: "Your Reliable Partner for Quality Construction Materials in Chennai",
+    description:
+      "From P-Sand, M-Sand, Fly Ash Bricks to Paver Blocks, Sai Saranya Enterprises has been strengthening the foundations of homes and commercial projects since 2009. Trusted by builders, loved by homeowners, and recognized for our commitment to quality and on-time delivery.",
+    bg: "/sandbg.jpg",
   },
   {
-    subtitle: "BRICKS",
-    description: "Premium Red Clay Bricks",
-    images: [
-      "/bricks.png"
-    ],
-    bg: "linear-gradient(135deg, #B22222 0%, #8B0000 50%, #654321 100%)",
+    subtitle: "Powering Chennai’s Progress with Superior Construction Supplies",
+    description:
+      "From P-Sand, M-Sand, Fly Ash Bricks to Paver Blocks, Sai Saranya Enterprises has been strengthening the foundations of homes and commercial projects since 2009. Trusted by builders, loved by homeowners, and recognized for our commitment to quality and on-time delivery.",
+    bg: "/blockbg.webp",
   },
   {
-    subtitle: "CEMENT",
-    description: "Grade 53 Portland Cement",
-    images: [
-      "/cement1.png"
-    ],
-    bg: "linear-gradient(135deg, #708090 0%, #2F4F4F 50%, #696969 100%)",
-  }
+    subtitle: "Building Chennai’s Future with Quality Construction Supplies",
+    description:
+      "From P-Sand, M-Sand, Fly Ash Bricks to Paver Blocks, Sai Saranya Enterprises has been strengthening the foundations of homes and commercial projects since 2009. Trusted by builders, loved by homeowners, and recognized for our commitment to quality and on-time delivery.",
+    bg: "/bg.jpg",
+  },
 ];
-
-function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 export default function HeroBannerCenterFixed() {
   const bannerRef = useRef(null);
@@ -44,9 +33,18 @@ export default function HeroBannerCenterFixed() {
   const slideRefs = useRef([]);
 
   useGSAP(() => {
-    gsap.set(slideRefs.current, { autoAlpha: 0, scale: 0.96 });
-    gsap.set(slideRefs.current[0], { autoAlpha: 1, scale: 1 });
+    // Set initial state (no blur for smoothness)
+    gsap.set(slideRefs.current, {
+      autoAlpha: 0,
+      scale: 0.97,
+      willChange: "transform, opacity",
+    });
+    gsap.set(slideRefs.current[0], {
+      autoAlpha: 1,
+      scale: 1,
+    });
 
+    // Timeline for smooth slide switching, no blur
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: bannerRef.current,
@@ -55,112 +53,160 @@ export default function HeroBannerCenterFixed() {
         scrub: true,
         pin: pinRef.current,
         pinSpacing: true,
-        anticipatePin: 1
-      }
+        anticipatePin: 0, // For less "shake"
+      },
     });
 
     slides.forEach((slide, i) => {
       if (i < slides.length - 1) {
-        tl.to(slideRefs.current[i], { autoAlpha: 0, scale: 0.95, duration: 0.33 }, i * 0.5)
-          .to(slideRefs.current[i + 1], { autoAlpha: 1, scale: 1, duration: 0.33 }, i * 0.5);
+        tl.to(
+          slideRefs.current[i],
+          {
+            autoAlpha: 0,
+            scale: 0.96,
+            duration: 0.45,
+            force3D: true,
+          },
+          i * 0.5
+        ).to(
+          slideRefs.current[i + 1],
+          {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.45,
+            force3D: true,
+          },
+          i * 0.5
+        );
       }
     });
   }, { scope: bannerRef });
 
   return (
-    <>
+    <div
+      ref={bannerRef}
+      style={{
+        minHeight: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+      }}
+    >
       <div
-        ref={bannerRef}
+        ref={pinRef}
         style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
+          borderRadius: 28,
+          overflow: "hidden",
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.13)",
+          width: "98vw",
+          height: "95vh",
+          position: "relative",
         }}
       >
-        <div
-          ref={pinRef}
-          style={{
-            borderRadius: 28,
-            overflow: "hidden",
-            boxShadow: "0 8px 40px rgba(0, 0, 0, 0.13)",
-            width: "98vw",
-            height: '95vh',
-            background: slides[0].bg,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative"
-          }}
-        >
-          {slides.map((slide, i) => (
+        {slides.map((slide, i) => (
+          <div
+            ref={(el) => (slideRefs.current[i] = el)}
+            key={slide.subtitle}
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url(${slide.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              willChange: "transform, opacity",
+              display: "block",
+            }}
+          >
+            {/* Overlay */}
             <div
-              ref={el => (slideRefs.current[i] = el)}
-              key={slide.subtitle}
               style={{
-                background: slide.bg,
                 position: "absolute",
                 inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 1
+                background: "rgba(0,0,0,0.45)",
+                zIndex: 1,
+              }}
+            />
+
+            {/* Left-aligned large headline */}
+            <div
+              style={{
+                position: "absolute",
+                left: "0",
+                bottom: "100px",
+                // transform: "translateY(50%)",
+                width: "53vw",
+                paddingLeft: "2vw",
+                zIndex: 2,
+                color: "#fdf6e3",
+                fontFamily: "Montserrat, Arial, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(4.2rem, 3vw, 5rem)",
+                lineHeight: 1.13,
+                textShadow: "0 8px 50px rgba(0,0,0,0.5)",
               }}
             >
-              {/* Background Text - Centered behind everything */}
-              <h1 style={{
-                fontSize: "15vw",
-                fontWeight: "900",
-                letterSpacing: "1.5vw",
-                color: "rgba(255, 255, 255, 0.08)",
-                margin: 0,
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 0,
-                userSelect: "none",
-                pointerEvents: "none"
-              }}>
-                {slide.subtitle}
-              </h1>
-              
-              {/* Content Container - Above background text */}
-              <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 2,
-                position: "relative"
-              }}>
-                <Image 
-                  src={getRandom(slide.images)} 
-                  alt={slide.subtitle} 
-                  width={300} 
-                  height={300}
-                  style={{
-                    marginBottom: "30px",
-                    filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))"
-                  }}
-                />
-                
-                <p style={{ 
-                  color: "#fff", 
-                  fontSize: 24, 
-                  margin: "0 0 30px 0",
-                  textAlign: "center",
-                  fontWeight: "500",
-                  textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)"
-                }}>
-                  {slide.description}
-                </p>
-              </div>
+              {slide.subtitle}
             </div>
-          ))}
-        </div>
+
+            {/* Right bottom short description and button */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "8vh",
+                right: "4vw",
+                width: "35vw",
+                minWidth: "320px",
+                zIndex: 3,
+                textAlign: "right",
+                color: "#fff",
+                fontFamily: "Arial, sans-serif",
+                textShadow: "0 2px 10px rgba(0,0,0,0.8)",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.25rem",
+                  marginBottom: "13px",
+                  fontWeight: 400,
+                  lineHeight: 1.57,
+                  fontStyle: "italic",
+                }}
+              >
+                {slide.description}
+              </div>
+              <button
+                style={{
+                  background: "none",
+                  color: "white",
+                  border: "2px solid var(--primary)",
+                  borderRadius: "24px",
+                  padding: "8px 28px",
+                  fontSize: "1.15rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "background 0.3s,color 0.3s",
+                  position: "relative",
+                  marginTop: "6px",
+                }}
+                onClick={() => window.location.href = '/Products'}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--primary)";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "none";
+                  e.currentTarget.style.color = "#f28705";
+                }}
+              >
+                Explore Products
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

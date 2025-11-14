@@ -24,15 +24,7 @@ export default function Footer() {
               <li><a href="/">Home</a></li>
               <li><a href="/About">About us</a></li>
               <li><a href="/Products">Products</a></li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div className="footer-column">
-            <h3 className="column-title">Support</h3>
-            <ul className="footer-links">
               <li><a href="/Contact">Contact</a></li>
-              <li><a href="#refund">Refund Policy</a></li>
             </ul>
           </div>
 
