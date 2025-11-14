@@ -13,9 +13,8 @@ export default function Page() {
   const [circleActionsIdx, setCircleActionsIdx] = useState(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookingMaterial, setBookingMaterial] = useState("");
-  const isTouchDevice =
-    typeof window !== "undefined" &&
-    ("ontouchstart" in window || navigator.maxTouchPoints);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   const productSections = [
     {
@@ -26,7 +25,7 @@ export default function Page() {
       products: [
         {
           id: 1,
-          image: "/paver.png",
+          image: "/I-Block.jpg",
           title: "I-Block",
           specs: {
             thickness: "60mm",
@@ -42,15 +41,6 @@ export default function Page() {
             sizes: ["181×121×65MM", "121×121×65MM", "61×121×65MM"],
           },
         },
-        // {
-        //   id: 3,
-        //   image: "/paver.png",
-        //   title: "PAVER BLOCK",
-        //   specs: {
-        //     thickness: "65mm",
-        //     sizes: ["181×121×65MM", "121×121×65MM", "61×121×65MM"],
-        //   },
-        // },
       ],
     },
     {
@@ -61,11 +51,10 @@ export default function Page() {
       products: [
         {
           id: 1,
-          image: "/chalet.png",
+          image: "/FlyashBricks.jpg",
           title: "Fly Ash Bricks ",
           specs: {
             thickness: "80mm",
-            // sizes: ["200×150×80MM", "150×150×80MM", "100×150×80MM"],
           },
         },
         {
@@ -77,15 +66,6 @@ export default function Page() {
             sizes: ["4”, 6”, 8”"],
           },
         },
-        // {
-        //   id: 3,
-        //   image: "/chalet.png",
-        //   title: "CHALET BLOCK",
-        //   specs: {
-        //     thickness: "80mm",
-        //     sizes: ["200×150×80MM", "150×150×80MM", "100×150×80MM"],
-        //   },
-        // },
       ],
     },
     {
@@ -96,46 +76,42 @@ export default function Page() {
       products: [
         {
           id: 1,
-          image: "/compound.png",
+          image: "/m-sand.jpg",
           title: "M-Sand",
           specs: {
             thickness: "6mm, 12mm, 20mm Chips",
-            // sizes: ["400×200×100MM", "300×200×100MM", "200×200×100MM"],
           },
         },
         {
           id: 2,
-          image: "/compound.png",
+          image: "/p-sand.jpg",
           title: "P-Sand",
           specs: {
             thickness: "100mm",
-            // sizes: ["400×200×100MM", "300×200×100MM", "200×200×100MM"],
           },
         },
         {
           id: 3,
-          image: "/compound.png",
+          image: "/crusherDust.jpg",
           title: "Crusher Dust (Dust / Chips)",
           specs: {
             thickness: "100mm",
-            // sizes: ["400×200×100MM", "300×200×100MM", "200×200×100MM"],
           },
         },
       ],
     },
     {
       id: 4,
-      category: " Stones & Drainage",
+      category: "Stones & Drainage",
       heroImage: "/solid-hero.jpg",
       sampleImage: "/solid.png",
       products: [
         {
           id: 1,
-          image: "/solid.png",
+          image: "/kerb-stone.jpg",
           title: "Kraib Stone ",
           specs: {
             thickness: "125mm / 100mm",
-            // sizes: ["600×200×150MM", "400×200×150MM", "200×200×150MM"],
           },
         },
         {
@@ -144,26 +120,34 @@ export default function Page() {
           title: "Sarucer Drain ",
           specs: {
             thickness: "80mm",
-            // sizes: ["600×200×150MM", "400×200×150MM", "200×200×150MM"],
           },
         },
-        // {
-        //   id: 3,
-        //   image: "/solid.png",
-        //   title: "SOLID BLOCK",
-        //   specs: {
-        //     thickness: "150mm",
-        //     sizes: ["600×200×150MM", "400×200×150MM", "200×200×150MM"],
-        //   },
-        // },
       ],
     },
   ];
-  // ---- GSAP Pinning ----
+
+  // Filter products based on search and selected category
+  const filteredSections = productSections
+    .filter((section) =>
+      selectedCategoryId ? section.id === selectedCategoryId : true
+    )
+    .map((section) => ({
+      ...section,
+      products: section.products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    }))
+    .filter((section) => section.products.length > 0);
+
+  // GSAP Pinning - depends on filteredSections for cleanup and re-init
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       const sections = sectionsRef.current;
+
+      // Kill all existing ScrollTriggers before creating new ones
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
       mm.add("(min-width: 1024px)", () => {
         sections.forEach((section, index) => {
           if (!section) return;
@@ -191,9 +175,10 @@ export default function Page() {
       mm.add("(max-width: 1023px)", () => {});
       return () => {
         mm.revert();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
-    { scope: containerRef, dependencies: [] }
+    { scope: containerRef, dependencies: [filteredSections] }
   );
 
   function handleCircleClick(key, e) {
@@ -213,8 +198,79 @@ export default function Page() {
 
   return (
     <div className="products-page" ref={containerRef}>
-      <div className="stack-container">
-        {productSections.map((section, sectionIdx) => (
+      <div
+        className="top-bar"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0.5rem 1rem",
+          background: "#f5f5f5",
+          flexWrap: "wrap",
+        }}
+      >
+        {/* Category List Left */}
+        <div
+          className="category-list"
+          style={{
+            display: "flex",
+            gap: "1rem",
+            overflowX: "auto",
+            flexWrap: "wrap",
+            flex: "1 1 auto",
+            minWidth: "200px",
+          }}
+        >
+          {productSections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() =>
+                setSelectedCategoryId(
+                  selectedCategoryId === section.id ? null : section.id
+                )
+              }
+              style={{
+                padding: "0.5rem 1rem",
+                borderRadius: "20px",
+                border:
+                  selectedCategoryId === section.id
+                    ? "2px solid #29ae65"
+                    : "1px solid #ccc",
+                background:
+                  selectedCategoryId === section.id ? "#d4f0dc" : "white",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                fontWeight: selectedCategoryId === section.id ? "bold" : "normal",
+              }}
+            >
+              {section.category}
+            </button>
+          ))}
+        </div>
+
+        {/* Search Bar Right */}
+        <div className="search-bar" style={{ flex: "0 0 250px", marginTop: "0.5rem" }}>
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.5rem 1rem",
+              borderRadius: "20px",
+              border: "1px solid #ccc",
+              fontSize: "1rem",
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="stack-container" key={filteredSections.map((s) => s.id).join("-")}>
+        {filteredSections.length === 0 && (
+          <p style={{ padding: "2rem", textAlign: "center", color: "#666" }}>No products found.</p>
+        )}
+        {filteredSections.map((section, sectionIdx) => (
           <section
             key={section.id}
             ref={(el) => (sectionsRef.current[sectionIdx] = el)}
@@ -268,9 +324,7 @@ export default function Page() {
                       <div className="product-details">
                         <h2 className="product-title">{product.title}</h2>
                         <div className="product-specs">
-                          <p className="thickness">
-                            Thickness : {product.specs.thickness}
-                          </p>
+                          <p className="thickness">Thickness : {product.specs.thickness}</p>
                           {product?.specs?.sizes?.length > 0 && (
                             <div className="sizes">
                               {product.specs.sizes.map((size, i) => (
@@ -286,12 +340,7 @@ export default function Page() {
                         className="product-card-circle-icon"
                         onClick={(e) => handleCircleClick(cardKey, e)}
                       >
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 40 40"
-                          fill="none"
-                        >
+                        <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
                           <circle
                             cx="20"
                             cy="20"
@@ -336,18 +385,14 @@ export default function Page() {
           </section>
         ))}
       </div>
+
       {/* Booking Form Modal */}
       {showBookingForm && (
         <div className="product-modal-overlay" onClick={closeForm}>
           <div className="product-modal" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title">Book Material</h3>
             <form className="booking-form">
-              <input
-                type="text"
-                placeholder="Your Name"
-                required
-                className="booking-input"
-              />
+              <input type="text" placeholder="Your Name" required className="booking-input" />
               <input
                 type="text"
                 placeholder="Company Name"
@@ -378,13 +423,9 @@ export default function Page() {
                 required
                 className="booking-input"
               />
-              <button type="submit" className="booking-submit-btn">
-                Submit
-              </button>
+              <button type="submit" className="booking-submit-btn">Submit</button>
             </form>
-            <button className="modal-close-btn" onClick={closeForm}>
-              ×
-            </button>
+            <button className="modal-close-btn" onClick={closeForm}>×</button>
           </div>
         </div>
       )}

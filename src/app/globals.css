@@ -2726,7 +2726,7 @@ body {
   background: var(--secondary);
   padding: 40px;
   border-radius: 12px;
-  color: var(--primary);
+  color: white;
   height: 700px;
 }
 
@@ -3118,48 +3118,38 @@ body {
     min-height: 320px;
     padding: 2rem 0;
   }
-
   .hero-text h1 {
     font-size: 1.75rem;
   }
-
   .hero-description {
     font-size: 0.95rem;
     line-height: 1.5;
   }
-
   .hero-sample-card {
     padding: 1rem;
     max-width: 280px;
   }
-
   .sample-image {
     max-width: 240px !important;
     max-height: 160px !important;
   }
-
   .product-page-content {
     padding: 0 1rem;
   }
-
   .products-section {
     padding: 2.5rem 1rem;
   }
-
   .product-image-wrapper {
     height: 12rem;
   }
-
   .product-title {
     font-size: 1.125rem;
     letter-spacing: 1px;
   }
-
   .sizes {
     flex-direction: column;
     gap: 0.5rem;
   }
-
   .size-item {
     width: 100%;
     text-align: center;

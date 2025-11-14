@@ -109,8 +109,8 @@ export default function HomeAbout() {
                 strength and grading standards. <br />
                 <span>Transparency in Service </span> – No hidden costs, no false promises —
                 just honest supply you can rely on. <br />
-                <span>Commitment to Clients </span> – We treat every site as our own project.<br/>
-                 From the smallest wall to the largest foundation, we help you build it better.
+                <span>Commitment to Clients </span> – We treat every site as our own project.<br />
+                From the smallest wall to the largest foundation, we help you build it better.
               </p>
 
               <div className="home-about-us-info-cards">
@@ -139,10 +139,10 @@ export default function HomeAbout() {
           <div className="home-about-us-right-content">
             <div className="home-about-us-badge">SINCE 2009</div>
             <p className="home-about-us-badge-text">
-              Sai Saranya Enterprises has grown into one of Chennai’s most dependable names 
-in construction material supply. 
-We started small — delivering bricks and sand locally — and today, we proudly serve major 
-residential and industrial projects across Chennai, Kanchipuram, and nearby regions.
+              Sai Saranya Enterprises has grown into one of Chennai’s most dependable names
+              in construction material supply.
+              We started small — delivering bricks and sand locally — and today, we proudly serve major
+              residential and industrial projects across Chennai, Kanchipuram, and nearby regions.
             </p>
 
             <div ref={imageRef} className="home-about-us-image-container">

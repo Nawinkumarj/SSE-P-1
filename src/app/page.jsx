@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Products from "./Components/Products";
 import BannerSection from "./Components/Bannersection";
-import FlowingMenu from "./Components/FlowingMenu";
 import CTA from "./Components/CTA";
 import HomeAbout from "./Components/HomeAbout";
 import Testimonials from "./Components/Testimonials";
@@ -14,28 +13,6 @@ import Serving from "./Components/Serving";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const demoItems = [
-    {
-      link: "#",
-      text: "Crafted for Lasting Prestige",
-      image: "https://picsum.photos/600/400?random=1",
-    },
-    {
-      link: "#",
-      text: "The Art of Structural Excellence",
-      image: "https://picsum.photos/600/400?random=2",
-    },
-    {
-      link: "#",
-      text: "Enduring Strength, Timeless Design",
-      image: "https://picsum.photos/600/400?random=3",
-    },
-    {
-      link: "#",
-      text: "Where Innovation Meets Integrity",
-      image: "https://picsum.photos/600/400?random=4",
-    },
-  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -146,16 +123,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Products />
-
-      {/* Why choose Section */}
-      <div className="why-choose-us">
-        <h1 className="heading">Why Choose us</h1>
-        <div style={{ height: "600px", position: "relative" }}>
-          <FlowingMenu items={demoItems} />
-        </div>
-      </div>
       {/* CTA Section */}
       <CTA />
       <Testimonials />

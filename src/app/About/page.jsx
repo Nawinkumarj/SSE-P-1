@@ -4,10 +4,33 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Faq from "../Components/Faq";
+import FlowingMenu from "../Components/FlowingMenu";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
+  const demoItems = [
+    {
+      link: "#",
+      text: "Crafted for Lasting Prestige",
+      image: "https://picsum.photos/600/400?random=1",
+    },
+    {
+      link: "#",
+      text: "The Art of Structural Excellence",
+      image: "https://picsum.photos/600/400?random=2",
+    },
+    {
+      link: "#",
+      text: "Enduring Strength, Timeless Design",
+      image: "https://picsum.photos/600/400?random=3",
+    },
+    {
+      link: "#",
+      text: "Where Innovation Meets Integrity",
+      image: "https://picsum.photos/600/400?random=4",
+    },
+  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroRef = useRef();
   const historyRef = useRef();
@@ -417,6 +440,13 @@ export default function Page() {
           </div>
         </div>
       </section>
+      {/* Why choose Section */}
+      <div className="why-choose-us">
+        <h1 className="heading">Why Choose us</h1>
+        <div style={{ height: "600px", position: "relative" }}>
+          <FlowingMenu items={demoItems} />
+        </div>
+      </div>
       <Faq />
     </div>
   );

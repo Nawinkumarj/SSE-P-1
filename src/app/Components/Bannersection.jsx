@@ -12,35 +12,25 @@ const slides = [
     subtitle: "SAND",
     description: "Fine Grade Construction Sand",
     images: [
-      "/sand.png",
-      "/sand.png",
-      "/sand.png",
+      "/sand.png"
     ],
     bg: "linear-gradient(135deg, #F4A460 0%, #DEB887 50%, #D2B48C 100%)",
-    cta: "Book Sand"
   },
   {
     subtitle: "BRICKS",
     description: "Premium Red Clay Bricks",
     images: [
-      "/bricks1.png",
-      "/bricks2.png",
-      "/bricks3.png",
-      "/bricks4.png"
+      "/bricks.png"
     ],
     bg: "linear-gradient(135deg, #B22222 0%, #8B0000 50%, #654321 100%)",
-    cta: "Book Bricks"
   },
   {
     subtitle: "CEMENT",
     description: "Grade 53 Portland Cement",
     images: [
-      "/cement1.png",
-      "/cement2.png",
-      "/cement3.png"
+      "/cement1.png"
     ],
     bg: "linear-gradient(135deg, #708090 0%, #2F4F4F 50%, #696969 100%)",
-    cta: "Book Cement"
   }
 ];
 
@@ -166,21 +156,6 @@ export default function HeroBannerCenterFixed() {
                 }}>
                   {slide.description}
                 </p>
-                
-                <button style={{
-                  padding: "18px 45px",
-                  borderRadius: 30,
-                  backgroundColor: "#FFC46B",
-                  color: "#222",
-                  fontWeight: "700",
-                  fontSize: 22,
-                  border: "none",
-                  cursor: "pointer",
-                  boxShadow: "0 6px 20px rgba(255, 196, 107, 0.25)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease"
-                }}>
-                  {slide.cta}
-                </button>
               </div>
             </div>
           ))}
