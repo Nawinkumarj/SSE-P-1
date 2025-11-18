@@ -320,6 +320,7 @@ body {
   font-weight: 400;
   line-height: 1.57;
   font-style: italic;
+  color: white !important;
 }
 
 .explore-button {
@@ -342,41 +343,59 @@ body {
   color: #fff;
 }
 
-/* MOBILE RESPONSIVE STYLES */
 @media (max-width: 768px) {
   .pin-container {
     width: 100vw;
     height: 100vh;
     border-radius: 0;
+    box-shadow: none;
   }
-
+  .slide {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-bottom: 90px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100vh;
+    min-height: 100vh;
+  }
   .subtitle {
-    bottom: 80px;
-    width: 90vw;
-    padding-left: 4vw;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.2;
-  }
-
-  .description-container {
-    bottom: 5vh;
-    right: 4vw;
-    width: 90vw;
-    min-width: auto;
+    position: static !important;
+    width: 100%;
+    font-size: 2rem;
+    line-height: 1.23;
+    margin-bottom: 14px;
+    padding: 0;
     text-align: left;
-    padding-left: 4vw;
+    box-shadow: none;
   }
-
   .description-text {
     font-size: 1rem;
     margin-bottom: 10px;
+    font-style: italic;
+    line-height: 1.45;
+    word-break: break-word;
   }
-
-  .explore-button {
+  .description-container {
+    position: static !important;
+    width: 100%;
     font-size: 1rem;
-    padding: 8px 20px;
+    margin-bottom: 14px;
+    text-align: left;
+    padding: 0;
+  }
+  .explore-button {
+    width: 100%;
+    max-width: 320px;
+    font-size: 1rem;
+    padding: 8px 0;
+    margin: 0 auto;
   }
 }
+
 
 /* Next Section */
 .next-section {
@@ -943,7 +962,9 @@ body {
     height: 320px;
   }
 }
+/* Feature sttarts */
 
+/* Feature ends */
 /* Products ends */
 /* Why choose */
 .why-choose-us{

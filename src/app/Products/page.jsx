@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import FeaturedProduct from "../Components/featured";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -293,7 +294,7 @@ export default function Page() {
           <section
             key={section.id}
             ref={(el) => (sectionsRef.current[sectionIdx] = el)}
-            id={section.sectionId} // <-- this enables anchor navigation!
+            id={section.sectionId}
             className="stack-section"
           >
             <div className="section-hero">
@@ -401,6 +402,7 @@ export default function Page() {
             </div>
           </section>
         ))}
+        <FeaturedProduct />
       </div>
       {/* Booking Form Modal */}
       {showBookingForm && (
