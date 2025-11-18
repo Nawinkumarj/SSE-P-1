@@ -102,9 +102,8 @@ export default function Page() {
               more about our materials, our team at Sai Saranya Enterprises is here to help.
               Reach out to us through the form below or connect with us directly — we’ll respond promptly.
             </p>
-
+            
             <div className="contact-details">
-
               <div className="contact-item">
                 <span className="contact-label">Address:</span>
                 <a href="mailto:hello@finpro.com" className="contact-value">

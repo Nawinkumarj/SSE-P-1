@@ -83,130 +83,31 @@ export default function HeroBannerCenterFixed() {
   }, { scope: bannerRef });
 
   return (
-    <div
-      ref={bannerRef}
-      style={{
-        minHeight: "100vh",
-        width: "100vw",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-      }}
-    >
+    <div ref={bannerRef} className="hero-banner">
+  <div ref={pinRef} className="pin-container">
+    {slides.map((slide, i) => (
       <div
-        ref={pinRef}
-        style={{
-          borderRadius: 28,
-          overflow: "hidden",
-          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.13)",
-          width: "98vw",
-          height: "95vh",
-          position: "relative",
-        }}
+        ref={(el) => (slideRefs.current[i] = el)}
+        key={slide.subtitle}
+        className="slide"
+        style={{ backgroundImage: `url(${slide.bg})` }}
       >
-        {slides.map((slide, i) => (
-          <div
-            ref={(el) => (slideRefs.current[i] = el)}
-            key={slide.subtitle}
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: `url(${slide.bg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              willChange: "transform, opacity",
-              display: "block",
-            }}
+        <div className="overlay" />
+
+        <div className="subtitle">{slide.subtitle}</div>
+
+        <div className="description-container">
+          <div className="description-text">{slide.description}</div>
+          <button
+            className="explore-button"
+            onClick={() => (window.location.href = "/Products")}
           >
-            {/* Overlay */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(0,0,0,0.45)",
-                zIndex: 1,
-              }}
-            />
-
-            {/* Left-aligned large headline */}
-            <div
-              style={{
-                position: "absolute",
-                left: "0",
-                bottom: "100px",
-                // transform: "translateY(50%)",
-                width: "53vw",
-                paddingLeft: "2vw",
-                zIndex: 2,
-                color: "#fdf6e3",
-                fontFamily: "Montserrat, Arial, sans-serif",
-                fontWeight: 900,
-                fontSize: "clamp(4.2rem, 3vw, 5rem)",
-                lineHeight: 1.13,
-                textShadow: "0 8px 50px rgba(0,0,0,0.5)",
-              }}
-            >
-              {slide.subtitle}
-            </div>
-
-            {/* Right bottom short description and button */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "8vh",
-                right: "4vw",
-                width: "35vw",
-                minWidth: "320px",
-                zIndex: 3,
-                textAlign: "right",
-                color: "#fff",
-                fontFamily: "Arial, sans-serif",
-                textShadow: "0 2px 10px rgba(0,0,0,0.8)",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "1.25rem",
-                  marginBottom: "13px",
-                  fontWeight: 400,
-                  lineHeight: 1.57,
-                  fontStyle: "italic",
-                }}
-              >
-                {slide.description}
-              </div>
-              <button
-                style={{
-                  background: "none",
-                  color: "white",
-                  border: "2px solid var(--primary)",
-                  borderRadius: "24px",
-                  padding: "8px 28px",
-                  fontSize: "1.15rem",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  transition: "background 0.3s,color 0.3s",
-                  position: "relative",
-                  marginTop: "6px",
-                }}
-                onClick={() => window.location.href = '/Products'}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--primary)";
-                  e.currentTarget.style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "none";
-                  e.currentTarget.style.color = "#f28705";
-                }}
-              >
-                Explore Products
-              </button>
-            </div>
-          </div>
-        ))}
+            Explore Products
+          </button>
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 }
