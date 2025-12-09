@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
-import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaArrowTrendUp, FaQ } from "react-icons/fa6";
+import Faq from '../Components/Faq';
 
 export default function Page() {
   const [formData, setFormData] = useState({
@@ -227,6 +228,7 @@ export default function Page() {
           </form>
         </div>
       </div>
+      <Faq />
     </div>
   );
 }

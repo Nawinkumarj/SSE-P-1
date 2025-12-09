@@ -8,7 +8,7 @@ const items = [
     textColor: "#fff",
     links: [
       { label: "Home", ariaLabel: "About Us", href: "/" },
-      { label: "Our Service", ariaLabel: "Careers", href: "/#services" },
+      { label: "Core values", ariaLabel: "Careers", href: "/#services" },
       { label: "Testimonials", ariaLabel: "Testimonials", href: "/#Testimonials" },
     ],
   },

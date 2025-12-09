@@ -12,22 +12,22 @@ export default function Page() {
   const demoItems = [
     {
       link: "#",
-      text: "Crafted for Lasting Prestige",
+      text: "Quality First",
       image: "https://picsum.photos/600/400?random=1",
     },
     {
       link: "#",
-      text: "The Art of Structural Excellence",
+      text: "On-Time Delivery",
       image: "https://picsum.photos/600/400?random=2",
     },
     {
       link: "#",
-      text: "Enduring Strength, Timeless Design",
+      text: "Competitive Pricing",
       image: "https://picsum.photos/600/400?random=3",
     },
     {
       link: "#",
-      text: "Where Innovation Meets Integrity",
+      text: "24/7 Customer Support",
       image: "https://picsum.photos/600/400?random=4",
     },
   ];

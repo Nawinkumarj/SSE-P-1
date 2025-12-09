@@ -328,12 +328,18 @@ export default function Page() {
               <div className="products-grid">
                 {section.products.map((product, idx) => {
                   const cardKey = `${section.id}-${idx}`;
+                  const isFeatured =
+                    product.title.trim().toLowerCase() === "fly ash bricks";
                   return (
                     <div
                       key={product.id}
                       className="product-card"
                       style={{ position: "relative" }}
                     >
+                      {/* Featured Badge */}
+                      {isFeatured && (
+                        <span className="featured-badge">Featured</span>
+                      )}
                       <div className="product-image-wrapper">
                         <Image
                           src={product.image}
@@ -402,60 +408,61 @@ export default function Page() {
             </div>
           </section>
         ))}
-        <FeaturedProduct />
+        {/* <FeaturedProduct /> */}
       </div>
       {/* Booking Form Modal */}
       {showBookingForm && (
-        <div className="product-modal-overlay" onClick={closeForm}>
-          <div className="product-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="modal-title">Book Material</h3>
-            <form className="booking-form">
-              <input
-                type="text"
-                placeholder="Your Name"
-                required
-                className="booking-input"
-              />
-              <input
-                type="text"
-                placeholder="Company Name"
-                required
-                className="booking-input"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                required
-                className="booking-input"
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                required
-                className="booking-input"
-              />
-              <input
-                type="text"
-                value={bookingMaterial}
-                readOnly
-                className="booking-input"
-              />
-              <input
-                type="text"
-                placeholder="Quantity (e.g., 1000 bricks)"
-                required
-                className="booking-input"
-              />
-              <button type="submit" className="booking-submit-btn">
-                Submit
-              </button>
-            </form>
-            <button className="modal-close-btn" onClick={closeForm}>
-              ×
-            </button>
-          </div>
+  <div className="product-modal-overlay" onClick={closeForm}>
+    <div className="product-modal new-form" onClick={(e) => e.stopPropagation()}>
+      <button className="modal-close-btn" onClick={closeForm}>
+        ×
+      </button>
+
+      <div className="form-header">
+        <h2>
+          Take Action Now <br />
+          <span className="highlight">Book Your Material!</span>
+        </h2>
+        <p>Fill out the form below, and we’ll get back to you soon!</p>
+      </div>
+
+      <form className="booking-form-grid">
+        <div className="form-row">
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email" required />
         </div>
-      )}
+        <div className="form-row">
+          <input type="tel" placeholder="Phone Number" required />
+          <input type="text" placeholder="Pin code (e.g., 689124)" required />
+        </div>
+        <div className="form-row single">
+          <input
+            type="text"
+            value={bookingMaterial}
+            readOnly
+            placeholder="Material"
+          />
+        </div>
+        <div className="form-row single">
+          <input
+            type="text"
+            placeholder="Quantity (e.g., 1000 bricks)"
+            required
+          />
+        </div>
+
+        <p className="note">
+          <strong>NOTE:</strong> Our team will contact you to confirm your booking
+          and provide details shortly.
+        </p>
+
+        <button type="submit" className="next-btn">
+          Book
+        </button>
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 }

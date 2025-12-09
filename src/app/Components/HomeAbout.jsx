@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,83 +7,48 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeAbout() {
   const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const headingRef = useRef(null);
-  const descRef = useRef(null);
-  const card1Ref = useRef(null);
-  const card2Ref = useRef(null);
+  const leftRef = useRef(null);
   const imageRef = useRef(null);
+  const rightRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
+      // Left heading animation
+      gsap.from(leftRef.current, {
         opacity: 0,
-        y: -30,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-
-      // Main heading animation
-      gsap.from(headingRef.current, {
-        opacity: 0,
-        y: 50,
+        x: -60,
         duration: 1,
-        delay: 0.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 85%",
         },
       });
 
-      // Description animation
-      gsap.from(descRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        delay: 0.4,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-
-      // Card animations with stagger
-      gsap.from([card1Ref.current, card2Ref.current], {
-        opacity: 0,
-        y: 60,
-        duration: 1,
-        stagger: 0.2,
-        delay: 0.6,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-        },
-      });
-
-      // Image animation with scale
+      // Image animation
       gsap.from(imageRef.current, {
         opacity: 0,
         scale: 0.9,
         duration: 1.2,
-        delay: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: "top 80%",
         },
       });
 
-      // Hover animation for cards
-      [card1Ref.current, card2Ref.current].forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-          gsap.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
-        });
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, { y: 0, duration: 0.3, ease: "power2.out" });
-        });
+      // Right description animation
+      gsap.from(rightRef.current, {
+        opacity: 0,
+        x: 60,
+        duration: 1,
+        delay: 0.4,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
       });
     }, sectionRef);
 
@@ -90,67 +56,50 @@ export default function HomeAbout() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="home-about-us">
-      <div className="home-about-us-container">
-        <div className="home-about-us-content-wrapper">
-          {/* Left Content */}
-          <div className="home-about-us-left-content">
-            <h1 ref={titleRef} className="home-about-us-title">
-              ABOUT US
-            </h1>
+    <section ref={sectionRef} className="about-section">
+      <div className="about-container">
+        {/* LEFT SIDE */}
+        <div ref={leftRef} className="about-left">
+          <h5 className="about-subtitle">[ ABOUT US ]</h5>
+          <h1 className="about-title">
+            MINDS <br /> BEHIND THE <br /> SUPPLY
+          </h1>
+        </div>
 
-            <div className="home-about-us-main-card">
-              <h2 ref={headingRef} className="home-about-us-heading">
-                Our journey has always been guided by three values:
-              </h2>
+        {/* CENTER IMAGE */}
+        <div ref={imageRef} className="about-image">
+          <img src="/maps.png" alt="Sai Saranya Enterprises" />
+        </div>
 
-              <p ref={descRef} className="home-about-us-description">
-                <span>Quality in Every Load </span> – Each product we deliver meets tested
-                strength and grading standards. <br />
-                <span>Transparency in Service </span> – No hidden costs, no false promises —
-                just honest supply you can rely on. <br />
-                <span>Commitment to Clients </span> – We treat every site as our own project.<br />
-                From the smallest wall to the largest foundation, we help you build it better.
-              </p>
+        {/* RIGHT SIDE CONTENT */}
+        <div ref={rightRef} className="about-right">
+          <p className="about-text">
+            Sai Saranya Enterprises has grown into one of Chennai’s most trusted
+            names in construction material supply. From our early days delivering
+            bricks and sand locally, we’ve evolved to serve major residential and
+            industrial projects across Chennai, Kanchipuram, and surrounding regions.
+            <br />
+            <br />
+            With a focus on quality, transparency, and customer satisfaction, we’ve
+            built a reputation for reliability and timely delivery in every order.
+          </p>
 
-              <div className="home-about-us-info-cards">
-                <div ref={card1Ref} className="home-about-us-info-card">
-                  <div className="home-about-us-card-icon">🌍</div>
-                  <h3>Tailor-Made Tours</h3>
-                  <p>
-                    With over 50 years of experience, our team of travel experts
-                    has traveled the globe.
-                  </p>
-                </div>
+          <a href="/about" className="about-btn">
+            WHO WE ARE <span className="arrow">↗</span>
+          </a>
 
-                <div ref={card2Ref} className="home-about-us-info-card">
-                  <div className="home-about-us-card-icon">🎯</div>
-                  <h3>Safety and Quality</h3>
-                  <p>
-                    Your well-being is at the heart of everything we do. We
-                    prioritize your safety and quality standards.
-                  </p>
-                </div>
-              </div>
+          <div className="about-stats">
+            <div className="stat">
+              <h2>16+</h2>
+              <p>YEARS OF EXPERIENCE</p>
             </div>
-          </div>
-
-          {/* Right Content */}
-          <div className="home-about-us-right-content">
-            <div className="home-about-us-badge">SINCE 2009</div>
-            <p className="home-about-us-badge-text">
-              Sai Saranya Enterprises has grown into one of Chennai’s most dependable names
-              in construction material supply.
-              We started small — delivering bricks and sand locally — and today, we proudly serve major
-              residential and industrial projects across Chennai, Kanchipuram, and nearby regions.
-            </p>
-
-            <div ref={imageRef} className="home-about-us-image-container">
-              <img src="/sand.png" alt="Vintage VW Van" />
+            <div className="stat">
+              <h2>400+</h2>
+              <p>PROJECTS SUPPLIED</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import { Analytics } from "@vercel/analytics/next"
+import Loader from "./Components/loader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Analytics />
+        <Loader />
         <Navbar />
         <main>{children}</main>
         <Footer />
