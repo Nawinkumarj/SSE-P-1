@@ -1,56 +1,53 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 
 export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="footer-container">
-      <div className="footer-content">
-        {/* Left side - Geometric Logo */}
-        <div className="logo-section">
-          <img src="/logo.png" alt="logo" />
-          {/* <h2 className="company-name">Sai Saranya Enterprises</h2> */}
-        </div>
-        {/* Footer Links Sections */}
-        <div className="footer-links-container">
-          {/* About Us */}
-          <div className="footer-column">
-            <h3 className="column-title">Quick Links</h3>
-            <ul className="footer-links">
-              <li><a href="/">Home</a></li>
-              <li><a href="/About">About us</a></li>
-              <li><a href="/Products">Products</a></li>
-              <li><a href="/Contact">Contact</a></li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div className="footer-column">
-            <h3 className="column-title">Social</h3>
-            <ul className="footer-links">
-              <li><a href="#instagram">Instagram</a></li>
-              <li><a href="#linkedin">LinkedIn</a></li>
-              <li><a href="#youtube">YouTube</a></li>
-            </ul>
+    <footer className="footer-container sse-footer">
+      <div className="footer-inner">
+        <div className="footer-logo-section">
+          <div className="logo-wrapper">
+            <img src="/logo.png" alt="SSE Logo" className="logo-image" />
           </div>
         </div>
-      </div>
+        <nav className="footer-navigation">
+          <a href="/">Home</a>
+          <a href="/Products">Products</a>
+          <a href="/About">About Us</a>
+          <a href="/Contact">Contact Us</a>
+        </nav>
 
-      {/* Footer Bottom */}
-      <div className="footer-bottom">
-        <div className="footer-bottom-content">
-          <p className="copyright">Designed & Developed by <span className="developer-name">Vcraftyu Company</span>
-          <span className="trademark">™</span>
-         </p>
-          <a href='/Terms' className="terms">Terms of Service</a>
+        <div className="footer-credit">
+          <p>
+            Designed & Developed by{" "}
+            <a
+              href="https://www.vcraftyucompany.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="developer-link"
+            >
+              Vcraftyu Company
+            </a>
+          </p>
+        </div>
+
+        {/* Pp & Back to Top */}
+        <div className="footer-bottom-row">
+          <a href="/Privacy" className="privacy-link">
+            Privacy Policy
+          </a>
+          <a href="/Terms" className="terms-link">
+            Terms & Conditions
+          </a>
           <button className="back-to-top" onClick={scrollToTop}>
             Back to top
             <svg className="arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M18 15l-6-6-6 6"/>
+              <path d="M18 15l-6-6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>

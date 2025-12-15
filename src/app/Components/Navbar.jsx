@@ -18,7 +18,7 @@ const items = [
     textColor: "#fff",
     links: [
       { label: "About SSE", ariaLabel: "About Sai Saranya Enterprises", href: "/About" },
-      { label: "Our Commitment", ariaLabel: "How we Work", href: "/About#commitment" },
+      { label: "Our Commitment", ariaLabel: "Commitment", href: "/About#commitment" },
       { label: "FAQ", ariaLabel: "Frequently Asked Questions ", href: "/About#faq" },
     ],
   },

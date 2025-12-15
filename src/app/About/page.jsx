@@ -323,7 +323,7 @@ export default function Page() {
             </div>
             <div className="history-image-secondary">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTFi9ZOIvCP-I9dcHN2Wl70dtxJBFaTdp9wQ&s"
+                src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=500&fit=crop"
                 alt="Building project"
               />
             </div>
